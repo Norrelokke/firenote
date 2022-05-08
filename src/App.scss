@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+
+:root {
+--primary: #efb6b2;
+--secondary: #4e4e4e;
+}
+
+body {
+  font-family: 'Fjalla One', sans-serif;
+  color: #222;
+}
+
+.navbar-light {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16);
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #222;
+}
+
+.UploadForm {
+  form {
+    text-align: center;
+  }
+
+  label input {
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+
+  label {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--primary);
+    border-radius: .25rem;
+    margin: auto;
+    line-height: 40px;
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 50px;
+  }
+
+  label:hover {
+    background: var(--primary);
+    color: white;
+  }
+
+}
+
+.myprofile a {
+  font-size: 50px;
+  color: #222;
+}
+
+.progress {
+  height: 5px;
+  background: var(--primary);
+  margin-top: 20px;
+}
+
+.img-grid {
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.img-wrap {
+  overflow: hidden;
+  height: 0;
+  padding: 50% 0;
+  position: relative;
+  opacity: 0.8;
+}
+
+.img-wrap img {
+  min-width: 100%;
+  min-height: 100%;
+  max-width: 150%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.likedstyle {
+  border: 5px solid var(--primary);
+  overflow: hidden;
+  height: 0;
+  padding: 50% 0;
+  position: relative;
+  opacity: 1;
+}
+
+.likedstyle img,
+.dislikedstyle img,
+.neutralstyle img {
+  min-width: 100%;
+  min-height: 100%;
+  max-width: 150%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.dislikedstyle {
+  border: 5px solid var(--secondary);
+  overflow: hidden;
+  height: 0;
+  padding: 50% 0;
+  position: relative;
+  opacity: 0.5;
+}
+
+.neutralstyle {
+  border: 5px dotted #d2d2d2;
+  overflow: hidden;
+  height: 0;
+  padding: 50% 0;
+  position: relative;
+  opacity: 0.8;
+}
+
+
+.plus .btn-primary {
+  background-color: var(--primary);
+  border: 5px solid var(--primary);
+  font-size: 50px;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border: 5px solid var(--primary);
+  font-size: 25px;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+  background-color: #fff;
+  border: 5px solid var(--primary);
+  color: var(--primary);
+}
+
+.folder-grid {
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 125px 125px 125px 125px 125px 125px 125px 125px 125px;
+  grid-gap: 20px;
+}
+
+.folder-wrap {
+  color: #fff;
+  height: 0;
+  padding: 50% 10px;
+  background-color: var(--primary);
+  border-radius: .25rem;
+}
+
+.singleFolder {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+
+  svg {
+    color: var(--primary);
+  }
+}
+
+.rewiew-btns {
+  position: absolute;
+  left: 2vw;
+  bottom: 10px;
+}
+
+.like-btn,
+.dislike-btn {
+  color: var(--primary);
+  margin: 10px 10px 10px 50px;
+  font-size: 19px;
+}
+
+.like-btn:hover,
+.dislike-btn:hover {
+  color: var(--secondary);
+}
+
+.dropzone {
+  border: 3px dashed var(--primary);
+  text-align: center;
+  color: var(--primary);
+  margin: 70px;
+}
+
+@media only screen and (max-width: 418px) {
+
+  .rewiew-btns {
+    position: absolute;
+    left: -9vw;
+    bottom: -7px;
+  }
+}
