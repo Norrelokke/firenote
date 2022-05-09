@@ -18,7 +18,7 @@ const useUpdateFolder =  () => {
            // find document with the same name as the params
        })
        const FolderToChange = docs.find(folder => folder.folderName === id)
-       const FolderRef = doc(db, thisUserId.uid, FolderToChange.id);
+       const FolderRef = doc(db, onlineUser.uid, FolderToChange.id);
        console.log(FolderToChange.id)
        updateDoc(FolderRef, {
            folderName: newname,
