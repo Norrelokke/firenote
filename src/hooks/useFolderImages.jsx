@@ -1,6 +1,6 @@
 import { useState} from 'react';
 import { useFirestoreQueryData } from '@react-query-firebase/firestore'
-import { collection, query, where, orderBy } from 'firebase/firestore'
+import { collection, query, where } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useAuthContext } from '../contexts/AuthContext'
 

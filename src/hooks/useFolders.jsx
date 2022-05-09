@@ -1,5 +1,5 @@
 import { useFirestoreQueryData } from '@react-query-firebase/firestore'
-import { collection, query, where, orderBy } from 'firebase/firestore'
+import { collection, query } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useAuthContext } from '../contexts/AuthContext'
 
@@ -15,7 +15,7 @@ const useFolders = (params = {}) => {
     ? [ 'reviewalbums']
     : [ onlineUser.uid]
 
-  const queryRef = query(colFoldersRef, orderBy('created', 'desc'))
+  const queryRef = query(colFoldersRef)
 
 
     const FolderQuery = useFirestoreQueryData(queryKey, queryRef, {
