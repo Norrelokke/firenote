@@ -19,7 +19,6 @@ const useUpdateFolder =  () => {
        })
        const FolderToChange = docs.find(folder => folder.folderName === id)
        const FolderRef = doc(db, onlineUser.email, FolderToChange.id);
-       console.log(FolderToChange.id)
        updateDoc(FolderRef, {
            folderName: newname,
        });

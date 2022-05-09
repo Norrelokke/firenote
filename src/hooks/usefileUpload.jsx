@@ -3,12 +3,16 @@ import { db, storage } from '../firebase'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { ref, getDownloadURL , uploadBytesResumable } from 'firebase/storage'
 import { useAuthContext } from '../contexts/AuthContext'
+import { v4 as uuidv4 } from "uuid";
 
 const usefileUpload = (file) => {
     const [progress, setProgress] = useState(0)
     const [message, setMessage] = useState(null)
     const [url, setUrl] = useState(null)
     const { onlineUser } = useAuthContext()
+
+    const _id = uuidv4();
+
     useEffect(() => {
         // reference to file inside firebase storage bucket
         // file doesnt exist yet, but when it is created it will have this name
@@ -31,6 +35,7 @@ const usefileUpload = (file) => {
             size: file.size,
             type: file.type,
             url,
+            _id,
           })
         });
       }, [file]);

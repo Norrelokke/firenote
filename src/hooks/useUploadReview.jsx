@@ -11,8 +11,7 @@ const useUploadReviewFolder = () => {
   const [url, setUrl] = useState(null)
 
   const UploadReview = (folder, folderimages) => {
-console.log(folder.folderimages)
-
+    
     const folderId = uuidv4();
 
     if (folder.folderimages === undefined) {
@@ -42,7 +41,7 @@ var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(
         folderName: time,
         path: fileRef.fullPath,
         url,
-        folderId,
+        _id: folderId,
         folderImages: folder.folderimages,
       })
     })

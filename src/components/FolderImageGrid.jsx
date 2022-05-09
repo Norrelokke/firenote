@@ -78,11 +78,9 @@ const FolderImageGrid = ({ query }) => {
     if (newliked.length) {
       setlikedImages(newliked)
       //set likeimage array to array without the selected image
-      console.log("liked", newliked)
-      console.log(allimages)
     }
     if (newdisliked.length)
-      console.log("disliked")
+
     {
       setdislikedImages(newdisliked)
     }

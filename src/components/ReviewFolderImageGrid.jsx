@@ -43,9 +43,7 @@ const ImageGrid = ({ query }) => {
     const imgdisliked = dislikedimages.filter(img => img.path == folderimage.path)
     // if this image exists in liked or unliked imagelist, return
     if (imgliked.length || imgdisliked.length) {
-      console.log("all", allimages)
-      console.log("liked", likedimages)
-      console.log("dis", dislikedimages)
+
       //if the image already exist in likedmages: return
       return
     }
@@ -80,10 +78,9 @@ const ImageGrid = ({ query }) => {
     if (newliked.length) {
       setlikedImages(newliked)
       //set likeimage array to array without the selected image
-      console.log("liked", newliked)
+
     }
     if (newdisliked.length)
-      console.log("disliked")
     {
       setdislikedImages(newdisliked)
     }

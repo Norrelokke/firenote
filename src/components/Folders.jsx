@@ -4,7 +4,7 @@ import useUploadFolder from '../hooks/useUploadFolder';
 const Folders = ({ name, setName, folderCover, setFolderCover }) => {
   const { url, progress } = useUploadFolder(name, folderCover);
   const [loading, setLoading] = useState(true)
-  console.log(progress)
+
   useEffect(() => {
     if (url) {
       setName(null);

@@ -3,8 +3,12 @@ import { db, storage } from '../firebase'
 import { doc, updateDoc, arrayUnion } from 'firebase/firestore'
 import { ref, getDownloadURL , uploadBytesResumable } from 'firebase/storage'
 import { useAuthContext } from '../contexts/AuthContext'
+import { v4 as uuidv4 } from "uuid";
 
 const useUploadImageToFolder =  () => {
+
+  
+  const _id = uuidv4();
     const [progress, setProgress] = useState(0)
     const [message, setMessage] = useState(null)
     const [url, setUrl] = useState(null)
@@ -36,6 +40,7 @@ const useUploadImageToFolder =  () => {
           size: image.size,
           type: image.type,
           url,
+          _id,
         }),
       })
     });

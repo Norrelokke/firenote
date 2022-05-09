@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import usefileUpload from '../hooks/usefileUpload';
-
+import React, { useEffect } from 'react'
+import usefileUpload from '../hooks/usefileUpload'
 
 const Images = ({ file, setFile }) => {
   const { progress, url } = usefileUpload(file);
