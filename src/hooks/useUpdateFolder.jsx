@@ -6,7 +6,7 @@ import { useAuthContext } from '../contexts/AuthContext'
 const useUpdateFolder =  () => {
     const { onlineUser } = useAuthContext()
 
-    const colFoldersRef = collection(db, onlineUser.uid)
+    const colFoldersRef = collection(db, onlineUser.email)
 
  const updateTitle = async (id, newname) => {
        // get docs from db/userid 
@@ -18,7 +18,7 @@ const useUpdateFolder =  () => {
            // find document with the same name as the params
        })
        const FolderToChange = docs.find(folder => folder.folderName === id)
-       const FolderRef = doc(db, onlineUser.uid, FolderToChange.id);
+       const FolderRef = doc(db, onlineUser.email, FolderToChange.id);
        console.log(FolderToChange.id)
        updateDoc(FolderRef, {
            folderName: newname,

@@ -30,7 +30,7 @@ console.log(folder.folderimages)
       // get reference to collection images
       const url = await getDownloadURL(fileRef)
       setUrl(url);
-       const collectionRef = collection(db, onlineUser.uid)
+       const collectionRef = collection(db, onlineUser.email)
 
        var today = new Date();
 

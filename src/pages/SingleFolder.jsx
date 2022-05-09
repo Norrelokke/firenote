@@ -26,7 +26,6 @@ const SingleFolder = () => {
     folderid:params.userid
 	}, 
   )
-
   const toggleShowsettings = () => {
     setShowsettings(!showsettings)
   }

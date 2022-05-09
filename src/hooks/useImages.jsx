@@ -9,7 +9,7 @@ const useImages = (params = {}) => {
 	const colImagesRef = collection(db, 'images')
 
   const queryKey = params.fetchUserImages
-  ? ['images', onlineUser.uid]
+  ? ['images', onlineUser.email]
   : ['images']
 
   const queryRef = params.fetchUserImages

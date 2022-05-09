@@ -13,10 +13,6 @@ const MyProfile = () => {
     })
     const folderQuery = useFolders()
 
-    const revfolderQuery = useFolders({
-        fetchReviewFolders: true,
-    })
-
     return (
 
         <div className="myprofile">
