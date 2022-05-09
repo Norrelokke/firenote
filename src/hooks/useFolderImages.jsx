@@ -16,8 +16,8 @@ const useFolderImages = (params = {}) => {
   : ['images']
 
   const queryRef = params.fetchAlbumImages
-  ? query(colImagesRef, where('folderName', '==', params.foldername), orderBy('created', 'desc'))
-  : query(colImagesRef, orderBy('created', 'desc'))
+  ? query(colImagesRef, where('folderName', '==', params.foldername))
+  : query(colImagesRef)
 
 	const imageQuery = useFirestoreQueryData(queryKey, queryRef, {
 		idField: '_id',
