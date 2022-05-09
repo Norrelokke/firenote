@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Alert } from 'react-bootstrap'
-import Images from './images'
+import Images from './images.jsx'
 
 // Form to upload single image
 const UploadForm = () => {
