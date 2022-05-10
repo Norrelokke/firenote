@@ -106,7 +106,7 @@ const FolderImageGrid = ({ query }) => {
           {query.data && query.data.map((image) => image.folderImages.map((folderimage) =>
 
             <div className={folderimage.className ? folderimage.className : "img-wrap"} key={folderimage._id}>
-              {folderimage._id}
+            
               <>  <img src={folderimage.url} alt="uploaded image" />
 
                 {showreview &&

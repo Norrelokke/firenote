@@ -13,7 +13,7 @@ const FolderGrid = ({ query }) => {
             <div className="folder-grid">
                 {query.data && query.data.map(folder => (
                     <div className="folder-wrap" key={folder._id} onClick={() => navigate("/folders/" + folder.folderName + "/" + onlineUser.uid)}>
-                        <h2>  {folder.folderName} </h2>
+                        <h6>  {folder.folderName} </h6>
                     </div>
                 ))
                 }
