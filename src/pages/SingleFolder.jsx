@@ -58,7 +58,7 @@ const SingleFolder = () => {
     <h3> Folder {name}</h3> 
 
    
-    <h2>  <FontAwesomeIcon icon={faCog} onClick={toggleShowsettings} /> </h2>
+ <h2>   <span className="spantext">Url/Upload/NameChange? PRESS COG </span><FontAwesomeIcon icon={faCog} onClick={toggleShowsettings} /> </h2>
       </Container>
 
       {showsettings &&
