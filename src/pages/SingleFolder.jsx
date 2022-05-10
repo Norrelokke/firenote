@@ -18,7 +18,7 @@ const SingleFolder = () => {
   const foldernameRef = useRef()
   const { updateTitle } = useUpdateFolder(params.foldername)
   const [name, setName] = useState(params.foldername)
-  const [folderurl, setFolderurl] = useState("/folders/" + params.foldername + "/" + params.userid )
+  const [folderurl, setFolderurl] = useState("https://spontaneous-beijinho-8ddd64.netlify.app/#/folders/" + params.foldername + "/" + params.userid )
 
   const imagesQuery = useFolderImages({
 		fetchAlbumImages:true,
