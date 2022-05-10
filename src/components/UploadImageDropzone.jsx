@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import useUploadImageToFolder from '../hooks/useUploadImageToFolder'
+import ProgressBar from 'react-bootstrap/ProgressBar'
 
 const UploadImageDropzone = (props) => {
 
@@ -21,7 +22,7 @@ const UploadImageDropzone = (props) => {
 	const { getRootProps, getInputProps, acceptedFiles, isDragActive, isDragAccept, isDragReject } = useDropzone({
 		accept: 'image/gif, image/jpeg, image/png, image/webp',
 		onDrop,
-		maxFiles: 3,
+		maxFiles: 1,
 	})
 
 	return (
@@ -47,6 +48,9 @@ const UploadImageDropzone = (props) => {
 					</ul>
 				</div>
 			)}
+
+<div className="py-5">{upload.progress !== null && <ProgressBar variant="success" animated now={upload.progress} />}</div>
+
 		</div>
 
 	)

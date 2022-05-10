@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { db, storage } from '../firebase'
 import { doc, updateDoc, arrayUnion } from 'firebase/firestore'
 import { ref, getDownloadURL , uploadBytesResumable } from 'firebase/storage'
@@ -7,17 +7,15 @@ import { v4 as uuidv4 } from "uuid";
 
 const useUploadImageToFolder =  () => {
 
-  
   const _id = uuidv4();
     const [progress, setProgress] = useState(0)
     const [message, setMessage] = useState(null)
     const [url, setUrl] = useState(null)
     const { onlineUser } = useAuthContext()
 
- const uploadImage = (image, album) => {
+ const uploadImage = async (image, album) => {
 
-    if (!image || image == undefined)
-    {
+    if (!image || image == undefined) {
         return
     }
 
@@ -43,8 +41,11 @@ const useUploadImageToFolder =  () => {
           _id,
         }),
       })
+      setProgress(null);
     });
-   
+
+
+
 }
 return { progress, url, message, uploadImage }
     

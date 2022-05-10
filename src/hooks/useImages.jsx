@@ -19,7 +19,9 @@ const useImages = (params = {}) => {
 
 	const imageQuery = useFirestoreQueryData(queryKey, queryRef, {
 		idField: '_id',
-	})
+	}, {
+    subscribe: true,
+  })
 
 	return imageQuery
 }

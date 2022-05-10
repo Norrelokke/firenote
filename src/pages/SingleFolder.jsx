@@ -24,7 +24,9 @@ const SingleFolder = () => {
 		fetchAlbumImages:true,
     foldername: params.foldername,
     folderid:params.userid
-	}, 
+	}, {
+    subscribe: true,
+  }
   )
   const toggleShowsettings = () => {
     setShowsettings(!showsettings)
