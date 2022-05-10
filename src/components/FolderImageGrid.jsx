@@ -35,7 +35,7 @@ const FolderImageGrid = ({ query }) => {
     await UploadReview({
       folderimages: likedimages,
     })
-    navigate("/");
+    navigate("/myprofile");
   }
 
   const handleLike = (folderimage) => {
