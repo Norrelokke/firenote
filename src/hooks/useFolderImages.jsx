@@ -21,8 +21,9 @@ const useFolderImages = (params = {}) => {
 
 	const imageQuery = useFirestoreQueryData(queryKey, queryRef, {
 		idField: '_id',
-	},{
     subscribe: true,
+	},{
+		refetchOnMount: 'always',
   })
 
 	return imageQuery

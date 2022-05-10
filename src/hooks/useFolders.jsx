@@ -20,7 +20,10 @@ const useFolders = (params = {}) => {
 
     const FolderQuery = useFirestoreQueryData(queryKey, queryRef, {
         idField: '_id',
-    })
+        subscribe: true,
+    }, {
+		refetchOnMount: 'always',
+	})
 
     return FolderQuery
 }

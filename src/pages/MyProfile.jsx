@@ -10,8 +10,6 @@ import FolderGrid from '../components/FolderGrid'
 const MyProfile = () => {
     const ImagesQuery = useImages({
         fetchUserImages: true,
-    }, {
-        subscribe: true,
     })
     const folderQuery = useFolders()
 

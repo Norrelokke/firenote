@@ -23,9 +23,10 @@ const SingleFolder = () => {
   const imagesQuery = useFolderImages({
 		fetchAlbumImages:true,
     foldername: params.foldername,
-    folderid:params.userid
+    folderid:params.userid,
+
 	}, {
-    subscribe: true,
+
   }
   )
   const toggleShowsettings = () => {
