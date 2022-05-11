@@ -36,7 +36,6 @@ const inputName = foldernameRef.current.value;
     e.preventDefault()
 
     await UploadFolder ({
-      
       name:foldernameRef.current.value,
     },
     folderCover,

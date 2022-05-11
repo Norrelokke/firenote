@@ -74,6 +74,7 @@ const ReviewFolderImageGrid = ({ query }) => {
       dislikedimages.push(folderimage)
       setAllimages(likedimages.length + dislikedimages.length)
 
+
     }
 
   }
@@ -91,6 +92,7 @@ const ReviewFolderImageGrid = ({ query }) => {
       dislikedimages.splice(dislikeindex, 1)
       folderimage.className = "neutralstyle"
       setAllimages(likedimages.length + dislikedimages.length)
+
     }
   }
 

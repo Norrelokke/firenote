@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 
 const useUpdateFolder =  () => {
     const params = useParams();
-
     const [FolderId, setFolderId] = useState(params.userid)
     const colFoldersRef = collection(db, FolderId)
  const updateTitle = async (id, newname) => {
@@ -24,7 +23,6 @@ const useUpdateFolder =  () => {
        updateDoc(FolderRef, {
            folderName: newname,
        });
-
  };
 
 return { updateTitle }

@@ -56,14 +56,15 @@ const SingleFolder = () => {
       </Container>
 
       {onlineUser && showsettings &&
-        <Container className='foldername col-md-4 py-5'><h2>Change foldername:</h2>
-        
+        <Container className='foldername col-md-4 py-5'>
+          
+          <UploadImageDropzone albumname={params.foldername} />
+          <p>Share Folderurl:  <input type="text" value={folderurl}  id="urlInput" readOnly></input> <Button onClick={copyText}>Copy text</Button></p>
+          <h3>Change foldername:</h3>
           <Form onSubmit={handleSubmit}>
             <Form.Control type="text" ref={foldernameRef} />
             <Button type="submit"><h3>Submit</h3></Button>
           </Form>
-          <UploadImageDropzone albumname={params.foldername} />
-          <p>Share Folderurl:  <input type="text" value={folderurl}  id="urlInput" readOnly></input> <Button onClick={copyText}>Copy text</Button></p>
         </Container>}
       <FolderImageGrid query={imagesQuery}/>  
     </>

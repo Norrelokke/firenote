@@ -41,7 +41,7 @@ const FolderImageGrid = ({ query }) => {
     const imgliked = likedimages.filter(img => img.path == folderimage.path)
     const imgdisliked = dislikedimages.filter(img => img.path == folderimage.path)
     // if this image exists in liked or unliked imagelist, return
-    if (imgliked.length || imgdisliked.length) {
+    if  (imgliked.includes(folderimage) || imgdisliked.includes(folderimage)) {
       //if the image already exist in likedmages: return
       return
     }
@@ -59,11 +59,10 @@ const FolderImageGrid = ({ query }) => {
   }
 
   const handleDisLike = (folderimage) => {
-
     const imgliked = likedimages.filter(img => img.path == folderimage.path)
     const imgdisliked = dislikedimages.filter(img => img.path == folderimage.path)
     // if this image exists in liked or unliked imagelist, return
-    if (imgliked.length || imgdisliked.length) {
+    if (imgliked.includes(folderimage) || imgdisliked.includes(folderimage)) {
       return
     }
     else {
@@ -72,24 +71,30 @@ const FolderImageGrid = ({ query }) => {
       folderimage.className = "dislikedstyle"
       dislikedimages.push(folderimage)
       setAllimages(likedimages.length + dislikedimages.length)
-
     }
 
   }
   const handleUndo = (folderimage) => {
+    
     const undone = undoneimages.filter(img => img.path == folderimage.path)
-    // insert image into undone array so I can later check if its already undone, if so return
+    // if this image already is undone, return
     if (undone.includes(folderimage)) {
+      return
+    }
+    // if this image is not liked or disliked, return
+    if (!likedimages.includes(folderimage) && !dislikedimages.includes(folderimage)) {
       return
     }
     else {
       undoneimages.push(folderimage)
       const likeindex = likedimages.findIndex(img => img.path == folderimage.path)
       const dislikeindex = dislikedimages.findIndex(img => img.path == folderimage.path)
+
       likedimages.splice(likeindex, 1)
       dislikedimages.splice(dislikeindex, 1)
       folderimage.className = "neutralstyle"
       setAllimages(likedimages.length + dislikedimages.length)
+
     }
   }
 
