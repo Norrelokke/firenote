@@ -2,12 +2,10 @@ import { useState} from 'react';
 import { useFirestoreQueryData } from '@react-query-firebase/firestore'
 import { collection, query, where } from 'firebase/firestore'
 import { db } from '../firebase'
-import { useAuthContext } from '../contexts/AuthContext'
+
 
 const useFolderImages = (params = {}) => {
-  
-  const { onlineUser } = useAuthContext()
-console.log(params)
+
   const [FolderId, setFolderId] = useState(params.FolderId)
 
 // the collection is retrieved

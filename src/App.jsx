@@ -11,7 +11,6 @@ import MyProfile from './pages/MyProfile'
 import UploadFolder from './components/UploadFolder'
 import SingleFolder from './pages/SingleFolder'
 
-
 function App() {
 
   return (
@@ -24,7 +23,6 @@ function App() {
           <Route path="/login" element={<Login />} />
 					<Route path="/signup" element={<Register />} />
           <Route path="/logout" element={<LogoutPage />} />
-
           <Route path="/folders/:foldername/:userid" element={<SingleFolder />} />
           <Route path="/revfolders/:foldername/:userid" element={<SingleFolder />} />       
              

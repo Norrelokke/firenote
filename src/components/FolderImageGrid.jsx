@@ -16,10 +16,10 @@ const FolderImageGrid = ({ query }) => {
   const [dislikedimages, setdislikedImages] = useState([]);
   const [btntext, setBtntext] = useState("Create review album");
 
-  const handleReview  =  () => {
+  const handleReview = () => {
     setBtntext("Go to profile to view new album")
     //uploads new album to db and sends user to profilepage
-      UploadReview({
+    UploadReview({
       folderimages: likedimages,
     })
   }
@@ -65,9 +65,7 @@ const FolderImageGrid = ({ query }) => {
       setlikedImages(newliked)
       //set likeimage array to array without the selected image
     }
-    if (newdisliked.length)
-
-    {
+    if (newdisliked.length) {
       setdislikedImages(newdisliked)
     }
 
@@ -86,12 +84,12 @@ const FolderImageGrid = ({ query }) => {
     <Container>
       <SRLWrapper>
         <div className="text-center"> <h1>Images</h1></div>
-     <Button type="submit" onClick={() =>setShowReview(!showreview)}><h2>Review Album</h2></Button>
+        <Button type="submit" onClick={() => setShowReview(!showreview)}><h2>Review Album</h2></Button>
         <div className="img-grid">
           {query.data && query.data.map((image) => image.folderImages.map((folderimage) =>
 
             <div className={folderimage.className ? folderimage.className : "img-wrap"} key={folderimage._id}>
-            
+
               <>  <img src={folderimage.url} alt="uploaded image" />
 
                 {showreview &&
@@ -109,8 +107,8 @@ const FolderImageGrid = ({ query }) => {
       </SRLWrapper>
 
       {showreview && <> <h3>{allimages <= 0 ? "0" : allimages} / {query.data ? query.data[0].folderImages.length : "0"} </h3>
-        <Button type="submit"  onClick={() => { handleReview() }}><h2>{btntext}</h2></Button></>}
- 
+        <Button type="submit" onClick={() => { handleReview() }}><h2>{btntext}</h2></Button></>}
+
     </Container>
   )
 }

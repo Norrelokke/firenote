@@ -11,7 +11,6 @@ import FolderImageGrid from '../components/FolderImageGrid'
 import { useAuthContext } from '../contexts/AuthContext'
 import useFolderImages from '../hooks/useFolderImages'
 
-
 const SingleFolder = () => {
   const { onlineUser } = useAuthContext()
   const params = useParams();

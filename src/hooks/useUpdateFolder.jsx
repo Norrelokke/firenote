@@ -1,25 +1,21 @@
 
-import { useEffect } from "react";
 import { updateDoc, doc, collection, getDocs, } from "firebase/firestore";
 import { db } from "../firebase";
-import { useAuthContext } from '../contexts/AuthContext'
 import { useState } from 'react';
 import { useParams } from "react-router-dom";
 
-
 const useUpdateFolder =  () => {
     const params = useParams();
-    console.log(params)
 
     const [FolderId, setFolderId] = useState(params.userid)
-
- const updateTitle =  (id, newname) => {
-    useEffect(() => {
+    const colFoldersRef = collection(db, FolderId)
+ const updateTitle = async (id, newname) => {
+ 
        // get docs from db/userid 
-       const querySnapshot =  getDocs(colFoldersRef)
+       const querySnapshot =  await getDocs(colFoldersRef)
        let docs = []
        // iterate through and push data into docs array
-       const unsubscribe =  querySnapshot.forEach((doc) => {
+         querySnapshot.forEach((doc) => {
            docs.push({ id: doc.id, name: doc.name, ...doc.data() })
            // find document with the same name as the params
        })
@@ -28,10 +24,7 @@ const useUpdateFolder =  () => {
        updateDoc(FolderRef, {
            folderName: newname,
        });
-       return () => {
-        unsubscribe();
-      };
-    }, []);
+
  };
 
 return { updateTitle }

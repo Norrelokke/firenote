@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from "uuid";
 
 const useUploadImageToFolder =  () => {
 
-
     const [progress, setProgress] = useState(0)
     const [message, setMessage] = useState(null)
     const [url, setUrl] = useState(null)
@@ -19,7 +18,6 @@ const useUploadImageToFolder =  () => {
         return
     }
     const _id = uuidv4();
-
 
     const storageRef = ref(storage, `${onlineUser.uid}/${album}/${image.name}`);
     const FolderRef = doc(db, onlineUser.uid, album);
@@ -45,8 +43,6 @@ const useUploadImageToFolder =  () => {
       })
       setProgress(null);
     });
-
-
 
 }
 return { progress, url, message, uploadImage }
