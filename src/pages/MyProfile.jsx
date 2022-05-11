@@ -5,13 +5,18 @@ import useImages from '../hooks/useImages'
 import UploadForm from '../components/UploadForm'
 import { Link } from 'react-router-dom'
 import useFolders from '../hooks/useFolders'
+import useReviewFolders from '../hooks/useReviewFolders'
 import FolderGrid from '../components/FolderGrid'
+import ReviewFolderGrid from '../components/ReviewFolderGrid'
 
 const MyProfile = () => {
     const ImagesQuery = useImages({
         fetchUserImages: true,
     })
     const folderQuery = useFolders()
+    const revfolderQuery = useFolders({
+        fetchReviewFolders:true,
+    })
 
     return (
 
@@ -24,6 +29,7 @@ const MyProfile = () => {
                     <Link to="/uploadfolder"><span className="plus">+</span></Link>
                 </div>
                 <FolderGrid query={folderQuery} />
+                <ReviewFolderGrid query={revfolderQuery} />
                 <ImageGrid query={ImagesQuery} />
             </Container>
         </div>

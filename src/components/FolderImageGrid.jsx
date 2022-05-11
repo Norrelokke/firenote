@@ -11,7 +11,6 @@ import { useParams } from "react-router-dom";
 
 const FolderImageGrid = ({ query }) => {
   const params = useParams();
-  console.log(params)
   const navigate = useNavigate();
   const { UploadReview } = useUploadReview()
   const [showreview, setShowReview] = useState(false)
@@ -46,13 +45,14 @@ const FolderImageGrid = ({ query }) => {
       return
     }
     else {
-      //delete image from undone array, so it can be undone again
-      const likedimgtodelete = undoneimages.filter(img => img.path == folderimage.path)
-      const likeindex = undoneimages.indexOf(likedimgtodelete)
+
+      const likeindex = undoneimages.findIndex(img => img.path == folderimage.path)
       undoneimages.splice(likeindex, 1)
+
       folderimage.className = "likedstyle"
       likedimages.push(folderimage)
       setAllimages(likedimages.length + dislikedimages.length)
+
     }
 
   }
@@ -66,14 +66,12 @@ const FolderImageGrid = ({ query }) => {
       return
     }
     else {
-      //delete image from undone array, so it can be undone again
-      const dislikedimgtodelete = undoneimages.filter(img => img.path == folderimage.path)
-      const likeindex = undoneimages.indexOf(dislikedimgtodelete)
+      const likeindex = undoneimages.findIndex(img => img.path == folderimage.path)
       undoneimages.splice(likeindex, 1)
-
       folderimage.className = "dislikedstyle"
       dislikedimages.push(folderimage)
       setAllimages(likedimages.length + dislikedimages.length)
+
     }
 
   }
@@ -86,14 +84,13 @@ const FolderImageGrid = ({ query }) => {
     else {
 
       undoneimages.push(folderimage)
-      const likedimgtodelete = likedimages.filter(img => img.path == folderimage.path)
-      const dislikedimgtodelete = dislikedimages.filter(img => img.path == folderimage.path)
-      const likeindex = likedimages.indexOf(likedimgtodelete)
-      const dislikeindex = likedimages.indexOf(dislikedimgtodelete)
+      const likeindex = likedimages.findIndex(img => img.path == folderimage.path)
+      const dislikeindex = dislikedimages.findIndex(img => img.path == folderimage.path)
       likedimages.splice(likeindex, 1)
       dislikedimages.splice(dislikeindex, 1)
       folderimage.className = "neutralstyle"
       setAllimages(likedimages.length + dislikedimages.length)
+
 
     }
   }

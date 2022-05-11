@@ -1,33 +1,31 @@
 import { useFirestoreQueryData } from '@react-query-firebase/firestore'
-import { collection, query, where } from 'firebase/firestore'
+import { collection, query } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useAuthContext } from '../contexts/AuthContext'
 
 
-const useFolders = (params = {}) => {
+const useReviewFolders = (params = {}) => {
     const { onlineUser } = useAuthContext()
 
     const colFoldersRef = params.fetchReviewFolders
-    ? collection(db, 'revalbums')
+    ? collection(db, 'reviewalbums')
     : collection(db,  onlineUser.uid)
 
     const queryKey = params.fetchReviewFolders
-    ? [ 'revalbums']
+    ? [ 'reviewalbums']
     : [ onlineUser.uid]
 
-  const queryRef = params.fetchReviewFolders
-  ? query(colFoldersRef, where('owner', '==', onlineUser.uid))
-  : query(colFoldersRef)
+  const queryRef = query(colFoldersRef)
 
 
-    const FolderQuery = useFirestoreQueryData(queryKey, queryRef, {
+    const revFolderQuery = useFirestoreQueryData(queryKey, queryRef, {
         idField: '_id',
         subscribe: true,
     }, {
 		refetchOnMount: 'always',
 	})
 
-    return FolderQuery
+    return revFolderQuery
 }
 
-export default useFolders
+export default useReviewFolders
