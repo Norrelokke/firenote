@@ -1,27 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import { SRLWrapper } from "simple-react-lightbox";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp, faThumbsDown, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from "react-router-dom";
 import useUploadReview from '../hooks/useUploadReview';
-
+import { Alert } from "react-bootstrap"
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const FolderImageGrid = ({ query }) => {
+  const params = useParams();
+  console.log(params)
+  const navigate = useNavigate();
   const { UploadReview } = useUploadReview()
   const [showreview, setShowReview] = useState(false)
   const [allimages, setAllimages] = useState([]);
   const [likedimages, setlikedImages] = useState([]);
   const [dislikedimages, setdislikedImages] = useState([]);
+  const [undoneimages, setUbdoneImages] = useState([]);
   const [btntext, setBtntext] = useState("Create review album");
+  const [message, setMessage] = useState(null)
 
   const handleReview = () => {
-    setBtntext("Go to profile to view new album")
-    //uploads new album to db and sends user to profilepage
-    UploadReview({
-      folderimages: likedimages,
-    })
+    //if all images has been reviewed, change buttontext
+    if (allimages == query.data[0].folderImages.length) {
+      setBtntext("Thank you for the review")
+      UploadReview({
+        owner: params.userid,
+        folderimages: likedimages,
+      })
+    }
+    else {
+      setMessage("Please review all images before creating a review")
+    }
   }
 
   const handleLike = (folderimage) => {
@@ -34,6 +46,10 @@ const FolderImageGrid = ({ query }) => {
       return
     }
     else {
+      //delete image from undone array, so it can be undone again
+      const likedimgtodelete = undoneimages.filter(img => img.path == folderimage.path)
+      const likeindex = undoneimages.indexOf(likedimgtodelete)
+      undoneimages.splice(likeindex, 1)
       folderimage.className = "likedstyle"
       likedimages.push(folderimage)
       setAllimages(likedimages.length + dislikedimages.length)
@@ -50,6 +66,11 @@ const FolderImageGrid = ({ query }) => {
       return
     }
     else {
+      //delete image from undone array, so it can be undone again
+      const dislikedimgtodelete = undoneimages.filter(img => img.path == folderimage.path)
+      const likeindex = undoneimages.indexOf(dislikedimgtodelete)
+      undoneimages.splice(likeindex, 1)
+
       folderimage.className = "dislikedstyle"
       dislikedimages.push(folderimage)
       setAllimages(likedimages.length + dislikedimages.length)
@@ -57,27 +78,24 @@ const FolderImageGrid = ({ query }) => {
 
   }
   const handleUndo = (folderimage) => {
-    const newliked = likedimages.filter(img => img.path !== folderimage.path)
-    //filter every image that does not have the same path as clicked image in liked images
-    const newdisliked = dislikedimages.filter(img => img.path !== folderimage.path)
-    //filter every image that does not have the same path as clicked image in disliked images
-    if (newliked.length) {
-      setlikedImages(newliked)
-      //set likeimage array to array without the selected image
+    const undone = undoneimages.filter(img => img.path == folderimage.path)
+    // insert image into undone array so I can later check if its already undone, if so return
+    if (undone.includes(folderimage)) {
+      return
     }
-    if (newdisliked.length) {
-      setdislikedImages(newdisliked)
-    }
+    else {
 
-    const likedimgtodelete = likedimages.filter(img => img.path == folderimage.path)
-    const dislikedimgtodelete = likedimages.filter(img => img.path == folderimage.path)
-    //filter out selected image and delete it from array
-    const likeindex = likedimages.indexOf(likedimgtodelete)
-    const dislikeindex = likedimages.indexOf(dislikedimgtodelete)
-    likedimages.splice(likeindex, 1)
-    likedimages.splice(dislikeindex, 1)
-    folderimage.className = "neutralstyle"
-    setAllimages(likedimages.length + dislikedimages.length)
+      undoneimages.push(folderimage)
+      const likedimgtodelete = likedimages.filter(img => img.path == folderimage.path)
+      const dislikedimgtodelete = dislikedimages.filter(img => img.path == folderimage.path)
+      const likeindex = likedimages.indexOf(likedimgtodelete)
+      const dislikeindex = likedimages.indexOf(dislikedimgtodelete)
+      likedimages.splice(likeindex, 1)
+      dislikedimages.splice(dislikeindex, 1)
+      folderimage.className = "neutralstyle"
+      setAllimages(likedimages.length + dislikedimages.length)
+
+    }
   }
 
   return (
@@ -108,6 +126,7 @@ const FolderImageGrid = ({ query }) => {
 
       {showreview && <> <h3>{allimages <= 0 ? "0" : allimages} / {query.data ? query.data[0].folderImages.length : "0"} </h3>
         <Button type="submit" onClick={() => { handleReview() }}><h2>{btntext}</h2></Button></>}
+      {message && (<Alert variant={"danger"} >{message}  <Button onClick={() => navigate("/myprofile")}><h2>Redo review</h2></Button> </Alert>)}
 
     </Container>
   )

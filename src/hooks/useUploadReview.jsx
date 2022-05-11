@@ -10,17 +10,17 @@ const useUploadReviewFolder = () => {
   const { onlineUser } = useAuthContext()
   const [url, setUrl] = useState(null)
 
-  const UploadReview = (folder, folderimages) => {
+  const UploadReview = (owner, folderimages) => {
     
     const folderId = uuidv4();
 
-    if (folder.folderimages === undefined) {
+    if (owner.folderimages === undefined) {
       folderimages = [];
     }
 
     const fileRef = ref(storage, `/revfolders/` + folderId )
 
-    uploadBytesResumable(fileRef, folder).on('state_changed', (snap) => {
+    uploadBytesResumable(fileRef, owner).on('state_changed', (snap) => {
 
     }, (e) => {
       setMessage(e);
@@ -42,7 +42,7 @@ var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(
         path: fileRef.fullPath,
         url,
         _id: folderId,
-        folderImages: folder.folderimages,
+        folderImages: owner.folderimages,
       })
     })
   };
