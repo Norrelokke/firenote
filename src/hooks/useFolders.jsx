@@ -9,11 +9,11 @@ const useFolders = (params = {}) => {
 
     const colFoldersRef = params.fetchReviewFolders
     ? collection(db, 'reviewalbums')
-    : collection(db,  onlineUser.email)
+    : collection(db,  onlineUser.uid)
 
     const queryKey = params.fetchReviewFolders
     ? [ 'reviewalbums']
-    : [ onlineUser.email]
+    : [ onlineUser.uid]
 
   const queryRef = query(colFoldersRef)
 

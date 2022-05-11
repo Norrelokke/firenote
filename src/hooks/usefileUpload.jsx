@@ -17,7 +17,7 @@ const usefileUpload = (file) => {
         // reference to file inside firebase storage bucket
         // file doesnt exist yet, but when it is created it will have this name
         // so i can later use the .on method and put it in the bucket
-        const storageRef = ref(storage, `${onlineUser.email}/images/ ${file.name}`);
+        const storageRef = ref(storage, `${onlineUser.uid}/images/ ${file.name}`);
         const collectionRef = collection(db, 'images');
         
         uploadBytesResumable(storageRef, file).on('state_changed', (snap) => {
@@ -30,7 +30,7 @@ const usefileUpload = (file) => {
           await addDoc(collectionRef, {
             created: serverTimestamp(),
             name: file.name,
-            owner: onlineUser.email,
+            owner: onlineUser.uid,
             path: storageRef.fullPath,
             size: file.size,
             type: file.type,

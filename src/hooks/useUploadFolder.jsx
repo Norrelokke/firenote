@@ -33,7 +33,7 @@ const useUploadFolder = () => {
       // get reference to collection images
       const url = await getDownloadURL(fileRef)
       setUrl(url);
-       const collectionRef = doc(db, onlineUser.email, name.name)
+       const collectionRef = doc(db, onlineUser.uid, name.name)
 
       // create document in db for the uploaded file
 
@@ -41,7 +41,7 @@ const useUploadFolder = () => {
         created: serverTimestamp(),
         folderName: name.name,
         path: fileRef.fullPath,
-        owner: onlineUser.email,
+        owner: onlineUser.uid,
         url,
         _id: folderId,
         folderCover: folderCover.name,

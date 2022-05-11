@@ -1,4 +1,4 @@
-import React, { useState, useEffect, } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import { SRLWrapper } from "simple-react-lightbox";
@@ -6,36 +6,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp, faThumbsDown, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom";
 import useUploadReview from '../hooks/useUploadReview';
-import { useParams } from "react-router-dom";
+
 
 const FolderImageGrid = ({ query }) => {
-  const params = useParams();
   const { UploadReview } = useUploadReview()
-  const navigate = useNavigate();
   const [showreview, setShowReview] = useState(false)
-  const [showreviewBtn, setShowReviewBtn] = useState(false)
   const [allimages, setAllimages] = useState([]);
   const [likedimages, setlikedImages] = useState([]);
   const [dislikedimages, setdislikedImages] = useState([]);
+  const [btntext, setBtntext] = useState("Create review album");
 
-
-  useEffect(() => {
-    //removes reviewbutton on pages that uses the imagegrid but is not a folder
-    if (params.foldername)
-      setShowReviewBtn(true)
-  }, []);
-
-  const ShowReview = () => {
-    // shows/hides reviewthumbs when reviewbutton is clicked
-    setShowReview(!showreview)
-  }
-
-  const handleReview = async () => {
-    //uploads new album to db and sends user to home
-    await UploadReview({
+  const handleReview  =  () => {
+    setBtntext("Go to profile to view new album")
+    //uploads new album to db and sends user to profilepage
+      UploadReview({
       folderimages: likedimages,
     })
-    navigate("/myprofile");
   }
 
   const handleLike = (folderimage) => {
@@ -98,10 +84,9 @@ const FolderImageGrid = ({ query }) => {
 
   return (
     <Container>
-      {/* <Container className="text-center">This folder does not contain any images, go to settings to upload</Container>  */}
       <SRLWrapper>
         <div className="text-center"> <h1>Images</h1></div>
-        {showreviewBtn && <Button type="submit" onClick={ShowReview}><h2>Review Album</h2></Button>}
+     <Button type="submit" onClick={() =>setShowReview(!showreview)}><h2>Review Album</h2></Button>
         <div className="img-grid">
           {query.data && query.data.map((image) => image.folderImages.map((folderimage) =>
 
@@ -124,7 +109,8 @@ const FolderImageGrid = ({ query }) => {
       </SRLWrapper>
 
       {showreview && <> <h3>{allimages <= 0 ? "0" : allimages} / {query.data ? query.data[0].folderImages.length : "0"} </h3>
-        <Button type="submit" onClick={() => { handleReview() }}><h2>Create Review Album</h2></Button></>}
+        <Button type="submit"  onClick={() => { handleReview() }}><h2>{btntext}</h2></Button></>}
+ 
     </Container>
   )
 }

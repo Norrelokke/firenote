@@ -29,7 +29,7 @@ const useUploadReviewFolder = () => {
       // get reference to collection images
       const url = await getDownloadURL(fileRef)
       setUrl(url);
-       const collectionRef = collection(db, onlineUser.email)
+       const collectionRef = collection(db, onlineUser.uid)
 
        var today = new Date();
 

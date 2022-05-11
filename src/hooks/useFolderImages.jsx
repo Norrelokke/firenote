@@ -5,11 +5,14 @@ import { db } from '../firebase'
 import { useAuthContext } from '../contexts/AuthContext'
 
 const useFolderImages = (params = {}) => {
+  
   const { onlineUser } = useAuthContext()
-  const [FolderId, setFolderId] = useState(onlineUser.email)
+console.log(params)
+  const [FolderId, setFolderId] = useState(params.FolderId)
+
 // the collection is retrieved
 // with the params so a user without credentials could review the album
-	const colImagesRef = collection(db, onlineUser.email)
+	const colImagesRef = collection(db,params.folderid)
 
   const queryKey = params.fetchAlbumImages
   ? [ FolderId,  params.foldername]
@@ -27,6 +30,7 @@ const useFolderImages = (params = {}) => {
   })
 
 	return imageQuery
+
 }
 
 export default useFolderImages;

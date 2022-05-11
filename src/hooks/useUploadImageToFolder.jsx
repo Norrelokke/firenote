@@ -22,7 +22,7 @@ const useUploadImageToFolder =  () => {
 
 
     const storageRef = ref(storage, `${onlineUser.uid}/${album}/${image.name}`);
-    const FolderRef = doc(db, onlineUser.email, album);
+    const FolderRef = doc(db, onlineUser.uid, album);
     
     uploadBytesResumable(storageRef, image).on('state_changed', (snap) => {
       setProgress(Math.round((snap.bytesTransferred / snap.totalBytes) * 100))
@@ -35,7 +35,7 @@ const useUploadImageToFolder =  () => {
       await updateDoc(FolderRef, {
         folderImages: arrayUnion({
           name: image.name,
-          owner: onlineUser.email,
+          owner: onlineUser.uid,
           path: storageRef.fullPath,
           size: image.size,
           type: image.type,

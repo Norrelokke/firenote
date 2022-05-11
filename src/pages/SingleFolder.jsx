@@ -8,14 +8,15 @@ import { faCog } from '@fortawesome/free-solid-svg-icons'
 import useUpdateFolder from '../hooks/useUpdateFolder'
 import UploadImageDropzone from '../components/UploadImageDropzone'
 import FolderImageGrid from '../components/FolderImageGrid'
-
+import { useAuthContext } from '../contexts/AuthContext'
 import useFolderImages from '../hooks/useFolderImages'
 
 
 const SingleFolder = () => {
+  const { onlineUser } = useAuthContext()
   const params = useParams();
   const [showsettings, setShowsettings] = useState(false)
-  const foldernameRef = useRef()
+  const foldernameRef = useRef() 
   const { updateTitle } = useUpdateFolder(params.foldername)
   const [name, setName] = useState(params.foldername)
   const [folderurl, setFolderurl] = useState("https://spontaneous-beijinho-8ddd64.netlify.app/#/folders/" + params.foldername + "/" + params.userid )
@@ -24,14 +25,8 @@ const SingleFolder = () => {
 		fetchAlbumImages:true,
     foldername: params.foldername,
     folderid:params.userid,
-
-	}, {
-
-  }
+	}
   )
-  const toggleShowsettings = () => {
-    setShowsettings(!showsettings)
-  }
   const copyText = () => {
     var copyText = document.getElementById("urlInput");
 
@@ -41,11 +36,11 @@ const SingleFolder = () => {
   
     /* Copy the text inside the text field */
     navigator.clipboard.writeText(copyText.value);
-
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
+
     updateTitle(params.foldername, foldernameRef.current.value)
 
     if (params.foldername !== foldernameRef.current.value)
@@ -58,10 +53,10 @@ const SingleFolder = () => {
     <h3> Folder {name}</h3> 
 
    
- <h2>   <span className="spantext">Url/Upload/NameChange? PRESS COG </span><FontAwesomeIcon icon={faCog} onClick={toggleShowsettings} /> </h2>
+ <h2>   <span className="spantext">Url/Upload/NameChange? PRESS COG </span><FontAwesomeIcon icon={faCog} onClick={() => setShowsettings(!showsettings)} /> </h2>
       </Container>
 
-      {showsettings &&
+      {onlineUser && showsettings &&
         <Container className='foldername col-md-4 py-5'><h2>Change foldername:</h2>
         
           <Form onSubmit={handleSubmit}>

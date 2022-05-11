@@ -24,6 +24,7 @@ const ImageGrid = ({ query }) => {
       setShowReviewBtn(true)
   }, []);
 
+
   const ShowReview = () => {
     // shows/hides reviewthumbs when reviewbutton is clicked
     setShowReview(!showreview)
