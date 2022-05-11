@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container'
 import { SRLWrapper } from "simple-react-lightbox";
 
 const ImageGrid = ({ query }) => {
-
+// simple imagegrid for simple folder images
   return (
     <Container>
       {query.data === undefined || query.data.length == 1 ? <Container className="text-center">This folder does not contain any images, go to settings to upload</Container> :

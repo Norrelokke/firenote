@@ -9,18 +9,17 @@ import useUpdateFolder from '../hooks/useUpdateFolder'
 import UploadImageDropzone from '../components/UploadImageDropzone'
 import FolderImageGrid from '../components/FolderImageGrid'
 import { useAuthContext } from '../contexts/AuthContext'
-import useFolderImages from '../hooks/useFolderImages'
+import useReviewFolderImages from '../hooks/useReviewFolderImages'
 
-const SingleFolder = () => {
+const ReviewSingleFolder = () => {
   const { onlineUser } = useAuthContext()
   const params = useParams();
   const [showsettings, setShowsettings] = useState(false)
   const foldernameRef = useRef() 
   const { updateTitle } = useUpdateFolder(params.foldername)
   const [name, setName] = useState(params.foldername)
-  const [folderurl, setFolderurl] = useState("https://spontaneous-beijinho-8ddd64.netlify.app/#/folders/" + params.foldername + "/" + params.userid )
-  const imagesQuery = useFolderImages({
-		fetchAlbumImages:true,
+  const [folderurl, setFolderurl] = useState("https://spontaneous-beijinho-8ddd64.netlify.app/#/revfolders/" + params.foldername + "/" + params.userid )
+  const imagesQuery = useReviewFolderImages({
     foldername: params.foldername,
     folderid:params.userid,
 	}
@@ -70,4 +69,4 @@ const SingleFolder = () => {
   )
 };
 
-export default SingleFolder;
+export default ReviewSingleFolder;

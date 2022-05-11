@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 const FolderImageGrid = ({ query }) => {
+  // grid that generates images inside of folders
   const params = useParams();
   const navigate = useNavigate();
   const { UploadReview } = useUploadReview()
@@ -82,7 +83,6 @@ const FolderImageGrid = ({ query }) => {
       return
     }
     else {
-
       undoneimages.push(folderimage)
       const likeindex = likedimages.findIndex(img => img.path == folderimage.path)
       const dislikeindex = dislikedimages.findIndex(img => img.path == folderimage.path)
@@ -90,8 +90,6 @@ const FolderImageGrid = ({ query }) => {
       dislikedimages.splice(dislikeindex, 1)
       folderimage.className = "neutralstyle"
       setAllimages(likedimages.length + dislikedimages.length)
-
-
     }
   }
 

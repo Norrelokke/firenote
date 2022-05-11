@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from '../contexts/AuthContext'
 
 const FolderGrid = ({ query }) => {
+    // grid that generates folders
     const navigate = useNavigate();
     const { onlineUser } = useAuthContext()
 

@@ -10,6 +10,7 @@ import LogoutPage from './pages/LogoutPage'
 import MyProfile from './pages/MyProfile'
 import UploadFolder from './components/UploadFolder'
 import SingleFolder from './pages/SingleFolder'
+import ReviewSingleFolder from './pages/ReviewSingleFolder'
 
 function App() {
 
@@ -24,7 +25,7 @@ function App() {
 					<Route path="/signup" element={<Register />} />
           <Route path="/logout" element={<LogoutPage />} />
           <Route path="/folders/:foldername/:userid" element={<SingleFolder />} />
-          <Route path="/revfolders/:foldername/:userid" element={<SingleFolder />} />       
+          <Route path="/revfolders/:foldername/:userid" element={<ReviewSingleFolder />} />       
              
           <Route path="/myprofile" element={
 						<RequireAuth redirectTo="/login">

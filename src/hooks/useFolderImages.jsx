@@ -8,8 +8,6 @@ const useFolderImages = (params = {}) => {
 
   const [FolderId, setFolderId] = useState(params.FolderId)
 
-// the collection is retrieved
-// with the params so a user without credentials could review the album
 	const colImagesRef = collection(db,params.folderid)
 
   const queryKey = params.fetchAlbumImages
