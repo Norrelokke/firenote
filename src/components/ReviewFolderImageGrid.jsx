@@ -64,7 +64,7 @@ const ReviewFolderImageGrid = ({ query }) => {
     const imgliked = likedimages.filter(img => img.path == folderimage.path)
     const imgdisliked = dislikedimages.filter(img => img.path == folderimage.path)
     // if this image exists in liked or unliked imagelist, return
-    if (imgliked.length || imgdisliked.length) {
+    if (imgliked.includes(folderimage) || imgdisliked.includes(folderimage)) {
       return
     }
     else {
@@ -84,15 +84,23 @@ const ReviewFolderImageGrid = ({ query }) => {
     if (undone.includes(folderimage)) {
       return
     }
+    if (!likedimages.includes(folderimage) && !dislikedimages.includes(folderimage)) {
+      return
+    }
     else {
       undoneimages.push(folderimage)
+      //if image is liked, remove from likedimages or disliked, remove from disliked images
       const likeindex = likedimages.findIndex(img => img.path == folderimage.path)
       const dislikeindex = dislikedimages.findIndex(img => img.path == folderimage.path)
-      likedimages.splice(likeindex, 1)
-      dislikedimages.splice(dislikeindex, 1)
+
+      if (likeindex >= 0) {
+        likedimages.splice(likeindex, 1)
+      }
+      if (dislikeindex >= 0) {
+        dislikedimages.splice(dislikeindex, 1)
+      }
       folderimage.className = "neutralstyle"
       setAllimages(likedimages.length + dislikedimages.length)
-
     }
   }
 
@@ -100,7 +108,7 @@ const ReviewFolderImageGrid = ({ query }) => {
     <Container>
       <SRLWrapper>
         <div className="text-center"> <h1>Images</h1></div>
-        <Button type="submit" onClick={() => setShowReview(!showreview)}><h2>Review Album</h2></Button>
+        {query.data && query.data[0].folderImages && query.data[0].folderImages.length >= 1 && <Button type="submit" onClick={() => setShowReview(!showreview)}><h2>Review Album</h2></Button>}
         <div className="img-grid">
           {query.data && query.data.map((image) => image.folderImages.map((folderimage) =>
 

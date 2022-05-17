@@ -8,14 +8,16 @@ import useUploadReview from '../hooks/useUploadReview';
 import { Alert } from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useEffect } from 'react';
 
 const FolderImageGrid = ({ query }) => {
   // grid that generates images inside of folders
+
   const params = useParams();
   const navigate = useNavigate();
   const { UploadReview } = useUploadReview()
   const [showreview, setShowReview] = useState(false)
-  const [allimages, setAllimages] = useState([]);
+  const [allimages, setAllimages] = useState(0);
   const [likedimages, setlikedImages] = useState([]);
   const [dislikedimages, setdislikedImages] = useState([]);
   const [undoneimages, setUbdoneImages] = useState([]);
@@ -41,20 +43,18 @@ const FolderImageGrid = ({ query }) => {
     const imgliked = likedimages.filter(img => img.path == folderimage.path)
     const imgdisliked = dislikedimages.filter(img => img.path == folderimage.path)
     // if this image exists in liked or unliked imagelist, return
-    if  (imgliked.includes(folderimage) || imgdisliked.includes(folderimage)) {
+    if (imgliked.includes(folderimage) || imgdisliked.includes(folderimage)) {
       //if the image already exist in likedmages: return
       return
     }
     else {
-
       const likeindex = undoneimages.findIndex(img => img.path == folderimage.path)
       undoneimages.splice(likeindex, 1)
-
       folderimage.className = "likedstyle"
       likedimages.push(folderimage)
       setAllimages(likedimages.length + dislikedimages.length)
-
     }
+
 
   }
 
@@ -75,7 +75,6 @@ const FolderImageGrid = ({ query }) => {
 
   }
   const handleUndo = (folderimage) => {
-    
     const undone = undoneimages.filter(img => img.path == folderimage.path)
     // if this image already is undone, return
     if (undone.includes(folderimage)) {
@@ -87,22 +86,28 @@ const FolderImageGrid = ({ query }) => {
     }
     else {
       undoneimages.push(folderimage)
+      //if image is liked, remove from likedimages or disliked, remove from disliked images
       const likeindex = likedimages.findIndex(img => img.path == folderimage.path)
       const dislikeindex = dislikedimages.findIndex(img => img.path == folderimage.path)
 
-      likedimages.splice(likeindex, 1)
-      dislikedimages.splice(dislikeindex, 1)
+      if (likeindex >= 0) {
+        likedimages.splice(likeindex, 1)
+      }
+      if (dislikeindex >= 0) {
+        dislikedimages.splice(dislikeindex, 1)
+      }
       folderimage.className = "neutralstyle"
       setAllimages(likedimages.length + dislikedimages.length)
-
     }
   }
 
+  /* line 107 explained: if the folder exists, and the folder has images in the array folderimages, show reviewbutton*/
   return (
     <Container>
       <SRLWrapper>
         <div className="text-center"> <h1>Images</h1></div>
-        <Button type="submit" onClick={() => setShowReview(!showreview)}><h2>Review Album</h2></Button>
+
+        {query.data && query.data[0].folderImages && query.data[0].folderImages.length >= 1 && <Button type="submit" onClick={() => setShowReview(!showreview)}><h2>Review Album</h2></Button>}
         <div className="img-grid">
           {query.data && query.data.map((image) => image.folderImages.map((folderimage) =>
 

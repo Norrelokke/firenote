@@ -13,7 +13,7 @@ const ReviewFolderGrid = ({ query }) => {
             <div className="text-center"> <h1>Reviews</h1> </div>
             <div className="folder-grid">
                 {query.data && query.data.map(folder => (
-                    <div className="folder-wrap" key={folder._id} onClick={() => navigate("/revfolders/" + folder.folderName + "/" + onlineUser.uid)}>
+                    <div className="folder-wrap" key={folder._id} onClick={() => navigate("/revfolders/" + folder.folderName + "/" + folder._id + "/" + onlineUser.uid)}>
                         <h6>  {folder.folderName} </h6>
                     </div>
                 ))

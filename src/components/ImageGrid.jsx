@@ -7,7 +7,7 @@ const ImageGrid = ({ query }) => {
 // simple imagegrid for simple folder images
   return (
     <Container>
-      {query.data === undefined || query.data.length == 1 ? <Container className="text-center">This folder does not contain any images, go to settings to upload</Container> :
+      {query.data === undefined || query.data.length == 0 ? <Container className="text-center">This folder does not contain any images, go to settings to upload</Container> :
         <SRLWrapper>
           <div className="img-grid">
             {query.data && query.data.map(image => (

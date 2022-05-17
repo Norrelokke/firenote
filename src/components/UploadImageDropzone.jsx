@@ -14,7 +14,7 @@ const UploadImageDropzone = (props) => {
 		}
 
 		acceptedFiles.forEach((file) => {
-			upload.uploadImage(file, props.albumname)
+			upload.uploadImage(file, props.folderid)
 		})
 
 	}, [])

@@ -24,8 +24,8 @@ function App() {
           <Route path="/login" element={<Login />} />
 					<Route path="/signup" element={<Register />} />
           <Route path="/logout" element={<LogoutPage />} />
-          <Route path="/folders/:foldername/:userid" element={<SingleFolder />} />
-          <Route path="/revfolders/:foldername/:userid" element={<ReviewSingleFolder />} />       
+          <Route path="/folders/:foldername/:folderid/:userid" element={<SingleFolder />} />
+          <Route path="/revfolders/:foldername/:folderid/:userid" element={<ReviewSingleFolder />} />       
              
           <Route path="/myprofile" element={
 						<RequireAuth redirectTo="/login">

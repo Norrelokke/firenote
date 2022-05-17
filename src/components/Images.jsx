@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import usefileUpload from '../hooks/usefileUpload'
+import ProgressBar from 'react-bootstrap/ProgressBar'
 
 const Images = ({ file, setFile }) => {
   const { progress, url } = usefileUpload(file);
@@ -12,7 +13,9 @@ const Images = ({ file, setFile }) => {
 
   return (
     <>
-      {progress && <div className={progress} style={{ width: progress }}>{progress}</div>}
+      {progress &&   
+      <ProgressBar variant="success" animated now={progress} />
+      }
     </>
   );
 }

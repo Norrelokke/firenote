@@ -5,7 +5,6 @@ import useImages from '../hooks/useImages'
 import UploadForm from '../components/UploadForm'
 import { Link } from 'react-router-dom'
 import useFolders from '../hooks/useFolders'
-import useReviewFolders from '../hooks/useReviewFolders'
 import FolderGrid from '../components/FolderGrid'
 import ReviewFolderGrid from '../components/ReviewFolderGrid'
 

@@ -8,7 +8,7 @@ const useFolderImages = (params = {}) => {
 
   const [FolderId, setFolderId] = useState(params.FolderId)
 
-	const colImagesRef = collection(db,params.folderid)
+	const colImagesRef = collection(db, params.folderid)
 
   const queryKey = params.fetchAlbumImages
   ? [ FolderId,  params.foldername]

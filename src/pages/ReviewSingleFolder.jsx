@@ -16,7 +16,7 @@ const ReviewSingleFolder = () => {
   const params = useParams();
   const [showsettings, setShowsettings] = useState(false)
   const foldernameRef = useRef() 
-  const { updateTitle } = useUpdateFolder(params.foldername)
+  const { updateTitle } = useUpdateFolder(params.folderid)
   const [name, setName] = useState(params.foldername)
   const [folderurl, setFolderurl] = useState("https://spontaneous-beijinho-8ddd64.netlify.app/#/revfolders/" + params.foldername + "/" + params.userid )
   const imagesQuery = useReviewFolderImages({
@@ -39,7 +39,7 @@ const ReviewSingleFolder = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    updateTitle(params.foldername, foldernameRef.current.value)
+    updateTitle( foldernameRef.current.value)
 
     if (params.foldername !== foldernameRef.current.value)
       setName(foldernameRef.current.value)
@@ -61,7 +61,7 @@ const ReviewSingleFolder = () => {
             <Form.Control type="text" ref={foldernameRef} />
             <Button type="submit"><h3>Submit</h3></Button>
           </Form>
-          <UploadImageDropzone albumname={params.foldername} />
+          <UploadImageDropzone folderid={params.folderid} />
           <p>Share Folderurl:  <input type="text" value={folderurl}  id="urlInput" readOnly></input> <Button onClick={copyText}>Copy text</Button></p>
         </Container>}
       <FolderImageGrid query={imagesQuery}/>  
